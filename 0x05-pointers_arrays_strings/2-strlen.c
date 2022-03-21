@@ -5,12 +5,12 @@
  * Return: void
 */
 
-
 int _strlen(char *s)
 {
-  int i = 0;
-  while (s[i])
-    i++;
+int i = 0;
+while (s[i])
+	i++;
 
-  return (i);
+return (i);
 }
+
