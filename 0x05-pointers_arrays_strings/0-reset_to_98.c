@@ -1,6 +1,8 @@
 /**
  * reset_to_98 - takes a pointer to an int as parameter
  *
+ * n: is an integer !
+ *
  * Return: updates the value it points to to 98
  */
 
