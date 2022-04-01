@@ -9,45 +9,33 @@
  * @i: Passed in variable from main for calculations
  * Return: The number of coins needed minimum for the passed in variable
  */
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-	int a = 0; /* money */
-	int b = 0; /* times */
-	int c = 0; /* storage*/
+	int a, n = 0, i, t;
+	int c[5] = {25, 10, 5, 2, 1};
 
-	if (argc == 1)
+	if (argc != 2)
 	{
-		printf("Error\n");
+		puts("Error");
 		return (1);
 	}
 	a = atoi(argv[1]);
-	if (a < 0)
+	if (a <= 0)
 	{
-		putchar('0');
-		putchar('\n');
-		return (0);
+		puts("0");
+		return (1);
 	}
-	b = a / 25;
-	if (a % 25 != 0)
+	else
 	{
-		c = a % 25;
-		b = b + c / 10;
-		if (c % 10 != 0)
+		for (i = 0; i < 5; i++)
 		{
-			a = c % 10;
-			b = b + a / 5;
-			if (a % 5 != 0)
-			{
-				c = a % 5;
-				b = b + c / 2;
-				if (c % 2 != 0)
-				{
-					a = c % 2;
-					b = b + a / 1;
-				}
-			}
+			t = a / c[i];
+			a -= t * c[i];
+			n += t;
+			if (a == 0)
+				break;
 		}
 	}
-	printf("%d\n", b);
+	printf("%d\n", n);
 	return (0);
 }
