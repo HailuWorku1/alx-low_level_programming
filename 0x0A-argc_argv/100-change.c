@@ -9,34 +9,45 @@
  * @i: Passed in variable from main for calculations
  * Return: The number of coins needed minimum for the passed in variable
  */
-int coinConverter(int i)
+int main(int argc, char **argv)
 {
-	int count = 0;
+	int a = 0; /* money */
+	int b = 0; /* times */
+	int c = 0; /* storage*/
 
-	while (i != 0)
+	if (argc == 1)
 	{
-		if (i % 10 == 9 || i % 10 == 7)
-			i -= 2;
-		else if (i % 25 == 0)
-			i -= 25;
-		else if (i % 10 == 0)
-			i -= 10;
-		else if (i % 5 == 0)
-			i -= 5;
-		else if (i % 2 == 0)
-		{
-			if (i % 10 == 6)
-				i -= 1;
-			else
-				i -= 2;
-		}
-		else
-			i -= 1;
-
-		count++;
+		printf("Error\n");
+		return (1);
 	}
-
-	return (count);
+	a = atoi(argv[1]);
+	if (a < 0)
+	{
+		putchar('0');
+		putchar('\n');
+		return (0);
+	}
+	b = a / 25;
+	if (a % 25 != 0)
+	{
+		c = a % 25;
+		b = b + c / 10;
+		if (c % 10 != 0)
+		{
+			a = c % 10;
+			b = b + a / 5;
+			if (a % 5 != 0)
+			{
+				c = a % 5;
+				b = b + c / 2;
+				if (c % 2 != 0)
+				{
+					a = c % 2;
+					b = b + a / 1;
+				}
+			}
+		}
+	}
+	printf("%d\n", b);
+	return (0);
 }
-
-
