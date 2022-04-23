@@ -1,18 +1,21 @@
+#include <stdio.h>
 #include "lists.h"
 
 /**
- * list_len - A function that gets the number of nodes of linked list
- * @h: head of linked list
- * Return: number of nodes as size_t
- */
+ * list_len - Prints length and the string, then returns amount of nodes
+ * @h: Pointer to a struct constant
+ * Return: Returns amount of node
+**/
+
 size_t list_len(const list_t *h)
 {
-	unsigned int nodes = 0;
+unsigned int count = 0;
 
-	while (h)
-	{
-		nodes++;
-		h = h->next;
-	}
-	return (nodes);
+while (h != NULL)
+{
+h = h->next;
+count++;
+}
+
+return (count);
 }
