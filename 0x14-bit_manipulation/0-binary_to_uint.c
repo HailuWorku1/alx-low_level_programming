@@ -1,49 +1,23 @@
 #include "main.h"
 
-/**
- * read_textfile - reads a text file and prints it to standard output
- * @filename: relative or absolute path of the file
- * @letters: number of letters to read and print
- *
- * Return: total number of chars printed.
- */
-
-ssize_t read_textfile(const char *filename, size_t letters)
+unsigned int binary_to_uint(const char *b)
 {
-	char *to_print;
-	ssize_t rd, wt;
-	int file;
-
-	if (filename == NULL)
-		return (0);
-	to_print = malloc(sizeof(char) * letters);
-	if (to_print == NULL)
-		return (0);
-	file = open(filename, O_RDONLY);
-	if (file < 0)
-	{
-		free(to_print);
-		return (0);
-	}
-	rd = read(file, to_print, letters);
-	if (rd < 0)
-	{
-		free(to_print);
-		return (0);
-	}
-	if (rd > 0)
-		wt = write(STDOUT_FILENO, to_print, rd);
-	if (wt < rd)
-	{
-		free(to_print);
-		return (0);
-	}
-	wt = close(file);
-	if (wt < 0)
-	{
-		free(to_print);
-		return (0);
-	}
-	free(to_print);
-	return (rd);
+int i, j, x, c;
+unsigned int n = 0;
+if (b == NULL)
+return (0);
+for (i = 0; b[i] != '\0'; i++)
+{
+if (b[i] != 48 && b[i] != 49)
+return (0);
+}
+j = 1;
+for (c = i - 1; c >= 0; c--)
+{
+x = b[c] - '0';
+x = x *j;
+j = j * 2;
+n = n + x;
+}
+return (n);
 }
