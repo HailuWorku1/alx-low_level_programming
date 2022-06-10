@@ -1,68 +1,45 @@
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 #include "lists.h"
-
 /**
- * main - check the code for Holberton School students.
- *
- * Return: Always EXIT_SUCCESS.
+ * delete_dnodeint_at_index - Delete node at nth
+ * @head: Pointer to direction of the head
+ * @index: The position in de ll
+ * Return: 1 if it succeeded or -1 if it failed
  */
-int main(void)
+int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
-    dlistint_t *head;
+	dlistint_t *p1, *res_mem = *head;
+	unsigned int counter = 0;
 
-    head = NULL;
-    add_dnodeint_end(&head, 0);
-    add_dnodeint_end(&head, 1);
-    add_dnodeint_end(&head, 2);
-    add_dnodeint_end(&head, 3);
-    add_dnodeint_end(&head, 4);
-    add_dnodeint_end(&head, 98);
-    add_dnodeint_end(&head, 402);
-    add_dnodeint_end(&head, 1024);
-    print_dlistint(head);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 5);
-    print_dlistint(head);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    print_dlistint(head);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    print_dlistint(head);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    print_dlistint(head);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    print_dlistint(head);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    print_dlistint(head);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    print_dlistint(head);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    printf("-----------------\n");
-    delete_dnodeint_at_index(&head, 0);
-    print_dlistint(head);
-    return (0);
+	if (head == NULL || *head == NULL)
+		return (-1);
+
+	if (index == 0)
+	{
+		*head = res_mem->next;
+		if (res_mem->next == NULL)
+			return (-1);
+		res_mem->next->prev = NULL;
+		free(res_mem);
+		return (1);
+	}
+
+	while (counter < index)
+	{
+		if (res_mem->next == NULL)
+			return (-1);
+		res_mem = res_mem->next;
+		counter++;
+	}
+	res_mem->prev->next = res_mem->next;
+	if (res_mem->next)
+		res_mem->next->prev = res_mem->prev;
+	if (res_mem->next == NULL)
+	{
+		p1 = res_mem->prev;
+		p1->next = NULL;
+		free(res_mem);
+		return (1);
+	}
+	free(res_mem);
+	return (1);
 }
